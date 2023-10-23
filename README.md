@@ -21,4 +21,5 @@ Objective: xyz
 ![Python](https://img.shields.io/badge/-Python-000000?style=flat&logo=python)
 
 **Running the App**
+npm install
 npm start
