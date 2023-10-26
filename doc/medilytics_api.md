@@ -152,8 +152,8 @@ Response
             'donor_status': 'rejected',
             'donor_status_message': 'Reason: Expired checkup result.',
             'organ': 'Kidney',
-            'date_created': '2023-08-25T14:43:16.776Z',
-            'date_updated': '2023-10-25T14:43:16.776Z'
+            'datetime_created': '2023-08-25T14:43:16.776Z',
+            'datetime_updated': '2023-10-25T14:43:16.776Z'
         },
         {
             'patient_id': '0002',
@@ -171,8 +171,8 @@ Response
             'donor_status': 'pending_surgery',
             'donor_status_message': 'A receipient is matched. Surgery is scheduled on 2022-09-22.',
             'organ': 'Kidney',
-            'date_created': '2022-01-25T14:43:16.776Z',
-            'date_updated': '2023-09-21T14:43:16.776Z'
+            'datetime_created': '2022-01-25T14:43:16.776Z',
+            'datetime_updated': '2023-09-21T14:43:16.776Z'
         },
     ]
 }
@@ -200,8 +200,8 @@ Response
             'recipient_status': 'pending_match',
             'recipient_status_message': 'Application approved. Pending match',
             'organ': 'Kidney',
-            'date_created': '2023-08-25T14:43:16.776Z',
-            'date_updated': '2023-10-25T14:43:16.776Z'
+            'datetime_created': '2023-08-25T14:43:16.776Z',
+            'datetime_updated': '2023-10-25T14:43:16.776Z'
         },
         {
             'patient_id': '0004',
@@ -214,8 +214,8 @@ Response
             'donor_status': 'pending_surgery',
             'donor_status_message': 'A donor is matched. Surgery is scheduled on 2022-09-24.',
             'organ': 'Kidney',
-            'date_created': '2022-01-25T14:43:16.776Z',
-            'date_updated': '2023-09-21T14:43:16.776Z'
+            'datetime_created': '2022-01-25T14:43:16.776Z',
+            'datetime_updated': '2023-09-21T14:43:16.776Z'
         },
     ]
 }
@@ -225,16 +225,15 @@ Response
 
 `POST /provider/patient`
 Request
+All fields in [US core patient](https://build.fhir.org/ig/HL7/US-Core/StructureDefinition-us-core-patient.html) can be added here. Below are the minimum required fields.
 
 ```
 {
     'request_type': 'provider-patient'
-    'basics': {
-        'first_name': 'Level',
-        'last_name': 'One',
-        'dob': '1980-01-02',
-        'gender': 'male',
-    },
+    'first_name': 'Level',
+    'last_name': 'One',
+    'dob': '1980-01-02',
+    'gender': 'male',
 }
 ```
 
@@ -245,12 +244,10 @@ Response - success
     'status': 'success',
     'request_type': 'provider-patient'
     'patient_id': '0005'
-    'basics': {
-        'first_name': 'Level',
-        'last_name': 'One',
-        'dob': '1980-01-02',
-        'gender': 'male',
-    },
+    'first_name': 'Level',
+    'last_name': 'One',
+    'dob': '1980-01-02',
+    'gender': 'male',
 }
 ```
 
@@ -319,8 +316,8 @@ Response
             'provider_id': '001',
             'provider_name': 'National Hospital',
             'request_status': 'pending_review',
-            'date_created': '2023-10-25T14:43:16.776Z',
-            'date_updated': '2023-10-25T14:45:16.776Z',
+            'datetime_created': '2023-10-25T14:43:16.776Z',
+            'datetime_updated': '2023-10-25T14:45:16.776Z',
             'documents_attached': [
                 '0005_002',
             ],
@@ -369,8 +366,8 @@ Response
             'provider_name': 'National Hospital',
             'request_status': 'pending_surgery',
             'request_status_display': 'A match was found on 2023-10-25, pending surgery',
-            'date_created': '2023-10-24T14:43:16.776Z',
-            'date_updated': '2023-10-25T14:45:16.776Z',
+            'datetime_created': '2023-10-24T14:43:16.776Z',
+            'datetime_updated': '2023-10-25T14:45:16.776Z',
             'documents_attached': [
                 '0005_002',
             ],
