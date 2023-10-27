@@ -1,0 +1,21 @@
+.formatted-link {
+    text-decoration: none; 
+    color: inherit; 
+  }
+
+.card-body {
+    width:500px;
+    height: 200px;
+    margin: 30px ;
+    border-left: 40px solid #C91C23;
+    background-color: rgb(135,135,135);
+  }
+.card-heading {
+    padding: 4px;
+    color: #1C3966;
+}
+
+.card-content {
+    padding: 4px;
+}
+
