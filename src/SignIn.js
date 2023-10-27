@@ -72,7 +72,8 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2 ,color: "#1C3966"}}
+              
             >
               Sign In
             </Button>
