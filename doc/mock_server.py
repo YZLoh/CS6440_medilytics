@@ -170,7 +170,7 @@ def add_provider_patient():
         'dob': '1980-01-02',
         'gender': 'male',
     }
-    resp = make_response(jsonify(data), 200) # 204 should be used if there is no content
+    resp = make_response(jsonify(data), 200)
     return resp
 
 # start the app
