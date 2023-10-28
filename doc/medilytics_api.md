@@ -1,8 +1,6 @@
 # Medilytics API documentation
 
-Examples of API shapes of Medilytics organ management platform. 
-
-
+Examples of API shapes of Medilytics organ management platform.
 
 A few things to note:
 
@@ -433,4 +431,13 @@ Response
     'message': 'Image successfully uploaded',
     'image_id': '0005_001'
 }
+```
+
+#### Start mock server
+
+Prerequisite: Flask version > 1.0
+Tested version: Python 3.11.6, Flask 3.0.0
+
+```
+python ./mock_server.py
 ```
