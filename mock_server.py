@@ -70,6 +70,109 @@ def get_patient_profiles():
     resp = make_response(jsonify(data), 200)
     return resp
 
+# Provider APIs
+@app.get("/provider/donors")
+def get_provider_donors():
+    data = {
+        'data_type': 'provider-donors',
+        'provider_id': '0001',
+        'size': 2,
+        'data_list': [
+            {
+                'patient_id': '0001',
+                'basics': {
+                    'first_name': 'Joe',
+                    'last_name': 'Doe',
+                    'dob': '1980-01-02',
+                    'gender': 'male',
+                },
+                'donor_code': {
+                    'url': 'http://terminology.hl7.org/CodeSystem/v2-0316',
+                    'code': 'I',
+                    'display': 'No, patient is not a documented donor, but information was provided',
+                },
+                'donor_status': 'rejected',
+                'donor_status_message': 'Reason: Expired checkup result.',
+                'organ': 'Kidney',
+                'datetime_created': '2023-08-25T14:43:16.776Z',
+                'datetime_updated': '2023-10-25T14:43:16.776Z'
+            },
+            {
+                'patient_id': '0002',
+                'basics': {
+                    'first_name': 'Adam',
+                    'last_name': 'Smith',
+                    'dob': '1990-01-02',
+                    'gender': 'male',
+                },
+                'donor_code': {
+                    'url': 'http://terminology.hl7.org/CodeSystem/v2-0316',
+                    'code': 'Y',
+                    'display': 'Yes, patient is a documented donor and documentation is on file',
+                },
+                'donor_status': 'pending_surgery',
+                'donor_status_message': 'A receipient is matched. Surgery is scheduled on 2022-09-22.',
+                'organ': 'Kidney',
+                'datetime_created': '2022-01-25T14:43:16.776Z',
+                'datetime_updated': '2023-09-21T14:43:16.776Z'
+            },
+        ]
+    }
+    resp = make_response(jsonify(data), 200)
+    return resp
+
+@app.get("/provider/recipients")
+def get_provider_receipients():
+    data = {
+        'data_type': 'provider-recipient',
+        'provider_id': '0001',
+        'size': 2,
+        'data_list': [
+            {
+                'patient_id': '0003',
+                'basics': {
+                    'first_name': 'Jack',
+                    'last_name': 'Smith',
+                    'dob': '1982-05-02',
+                    'gender': 'male',
+                },
+                'recipient_status': 'pending_match',
+                'recipient_status_message': 'Application approved. Pending match',
+                'organ': 'Kidney',
+                'datetime_created': '2023-08-25T14:43:16.776Z',
+                'datetime_updated': '2023-10-25T14:43:16.776Z'
+            },
+            {
+                'patient_id': '0004',
+                'basics': {
+                    'first_name': 'Beth',
+                    'last_name': 'Smith',
+                    'dob': '1995-01-02',
+                    'gender': 'female',
+                },
+                'donor_status': 'pending_surgery',
+                'donor_status_message': 'A donor is matched. Surgery is scheduled on 2022-09-24.',
+                'organ': 'Kidney',
+                'datetime_created': '2022-01-25T14:43:16.776Z',
+                'datetime_updated': '2023-09-21T14:43:16.776Z'
+            },
+        ]
+    }
+    resp = make_response(jsonify(data), 200)
+    return resp
+
+@app.post('/provider/patient')
+def add_provider_patient():
+    data = {
+        'request_type': 'provider-patient',
+        'first_name': 'Level',
+        'last_name': 'One',
+        'dob': '1980-01-02',
+        'gender': 'male',
+    }
+    resp = make_response(jsonify(data), 200) # 204 should be used if there is no content
+    return resp
+
 # start the app
 if '__main__' == __name__:
     app.run(debug=True, port=8088)
