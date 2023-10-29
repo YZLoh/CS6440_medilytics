@@ -1,9 +1,10 @@
-import * as React from 'react';
+import React, { useEffect, useState} from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import {IconButton, Divider, Typography,Box, CssBaseline, Toolbar, List, AppBar as MuiAppBar, Drawer as MuiDrawer  } from '@mui/material';
+import {Card, IconButton, Divider, Typography,Box, CssBaseline, Toolbar, List, AppBar as MuiAppBar, Drawer as MuiDrawer  } from '@mui/material';
 import {Menu, ChevronLeft, Logout } from '@mui/icons-material'
 import { menuListItems} from './menuList.js';
 import {useNavigate} from "react-router-dom";
+import axios from '../api/axios';
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -54,6 +55,20 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const defaultTheme = createTheme();
 
 export default function Dashboard() {
+
+    // API call to mock updates
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get('/patient/profile')
+        .then(response => {
+            setData(response.data);
+            // console.log(data);
+         
+        }).catch(error => {
+            console.error('Error:', error);
+        });},[]);
+// console.log(data.basics);
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -131,8 +146,37 @@ export default function Dashboard() {
           }}
         >
           <Toolbar />
+          {/* <Card className='profile-card'>
+          <Typography className='card-content'>Basics</Typography>
+          <Typography className='card-content'>Full Name: {data.basics.first_name} {data.basics.last_name}</Typography>
+          <Typography className='card-content'>Gender: {data.basics.gender}</Typography>
+          <Typography className='card-content'> Date of birth: {data.basics.dob}</Typography>
+        </Card>
+        <Card className='profile-card'>
+          <Typography className='card-content'>Basics</Typography>
+          <Typography className='card-content'>Full Name: {data.basics.first_name} {data.basics.last_name}</Typography>
+          <Typography className='card-content'>Gender: {data.basics.gender}</Typography>
+          <Typography className='card-content'> Date of birth: {data.basics.dob}</Typography>
+        </Card>
+        <Card className='profile-card'>
+        <Typography className='card-content'>Lab Results</Typography>
+        <Typography className='card-content'>Display: {data.latest_lab_result.display}</Typography>
+        <Typography className='card-content'>Issued: {data.latest_lab_result.issued}</Typography>
+        <Typography className='card-content'>Resource Type: {data.latest_lab_result.resource_type}</Typography>
+        <Typography className='card-content'>Resource Id: {data.latest_lab_result.resource_id}</Typography>
+        <Typography className='card-content'>{data.latest_lab_result.value} {data.latest_lab_result.unit}</Typography>
+        </Card>
+
+
+        <Card className='profile-card'>
+          <Typography className='card-content'>Donor Details</Typography>
+          <Typography className='card-content'> {data.donor_status} </Typography>
+          <Typography className='card-content'> {data.donor_status_message} </Typography>
+        </Card>  */}
         </Box>
+
       </Box>
+
     </ThemeProvider>
   );
 }
