@@ -19,3 +19,9 @@
     padding: 4px;
 }
 
+
+.profile-card {
+  width:900px;
+  height: 200px;
+  margin: 30px ;
+}

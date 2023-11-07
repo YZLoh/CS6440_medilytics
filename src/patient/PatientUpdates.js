@@ -1,13 +1,13 @@
-import * as React from 'react';
+import React, { useEffect, useState} from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import {Card, IconButton, Divider, Typography,Box, CssBaseline, Toolbar, List, AppBar as MuiAppBar, Drawer as MuiDrawer  } from '@mui/material';
 import {Menu, ChevronLeft, Logout } from '@mui/icons-material'
 import { menuListItems} from './menuList.js';
 import "../App.css";
 import {useNavigate} from "react-router-dom";
+import axios from '../api/axios';
 
-
-  const drawerWidth = 240;
+const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -57,6 +57,19 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const defaultTheme = createTheme();
 
 export default function Dashboard() {
+
+  // API call to mock updates
+  const [data, setData] = useState([]);
+
+useEffect(() => {
+    axios.get('/patient/updates')
+    .then(response => {
+        setData(response.data.data_list);
+     
+    }).catch(error => {
+        console.error('Error:', error);
+    });},[]);
+  //  console.log(data.data_list)
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -150,12 +163,18 @@ export default function Dashboard() {
           </Typography> */}
 
 {/* Notifs Present - Set title + content dynamically */}
- <Card  className="card-body" >
-  <Typography variant="h5" className='card-heading'>
-    Checkup Reminder
+{data.map((item,index) =>(
+ 
+  <>
+<Card  className="card-body" key={index} >
+ <Typography className='card-content'> {item.datetime} </Typography>
+  <Typography variant="h6" className='card-heading'>
+  {item.message}
   </Typography>
-  <Typography className='card-content'> Please perform a checkup ASAP...</Typography>
  </Card>
+  </>
+))}
+
         </Box>
       </Box>
     </ThemeProvider>

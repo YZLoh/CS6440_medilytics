@@ -1,9 +1,10 @@
 from fhirclient import client
 from flask import Flask, jsonify, make_response, request, session
 from pprint import pprint
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app,origins="http://localhost:3000")
 client_defaults = {
     'app_id': 'my_web_app',
     'api_base': 'https://fhir.collablynk.com/edifecs/fhir/R4' # open test servers: 'https://kefhir.kodality.dev/fhir/' , 'https://fhir.collablynk.com/edifecs/fhir/R4', 'http://hapi.fhir.org/baseR4' 
