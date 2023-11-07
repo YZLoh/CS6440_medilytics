@@ -20,11 +20,14 @@ Objective: xyz
 ![JavaScript](https://img.shields.io/badge/-JavaScript-000000?style=flat&logo=javascript)
 ![Python](https://img.shields.io/badge/-Python-000000?style=flat&logo=python)
 
-**Running the Project Locally** 
+**Running the Project Locally**   
 Install all node modules: npm install  
 Install missing python modules: i.e. pip install fhirclient  
 Launch locally (http://localhost:3000) : npm start  
-Run server: cd src/server and run server.py  
+Run server: cd src/server and run server.py      
+(working routes : /patient-profile , /patient-update , /login )  
 
-**Live Demo** 
+**Live Demo**   
 TBA
+
+
