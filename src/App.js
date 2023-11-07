@@ -1,4 +1,5 @@
 import SignIn from './SignIn';
+import Landing from './components/Landing';
 import PatientProfile from './patient/PatientProfile';
 import PatientUpdates from './patient/PatientUpdates';
 import Test from './patient/Test';
@@ -8,6 +9,7 @@ function App() {
     <>  
       <Router>
       <Routes>
+      <Route exact path="/" element={<Landing />} />
       <Route exact path="/login" element={<SignIn />} />
       <Route exact path="/patient-profile" element={<PatientProfile />} />
       <Route exact path="/patient-updates" element={<PatientUpdates />} />
