@@ -12,7 +12,7 @@ User type:Provider
 Objective: xyz
 ---
 ---
-User type:Organ Procurement Organization User(OPO)
+User type:Organ Procurement Organization User(OPO)   
 Objective: xyz
 ---
 
@@ -24,8 +24,9 @@ Objective: xyz
 Install all node modules: npm install  
 Install missing python modules: i.e. pip install fhirclient  
 Launch locally (http://localhost:3000) : npm start  
-Run server: cd src/server and run server.py      
-(working routes : /patient-profile , /patient-update , /login )  
+Run server: cd src/server and run server.py
+
+(working routes : Patient - /patient-profile , /patient-update , /login || Provider - /donors, /recipients || OPO - /pending-donations, /allocated-donations, /donation-records)  
 
 **Live Demo**   
 TBA
