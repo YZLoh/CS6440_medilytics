@@ -1,7 +1,21 @@
 import React, { useEffect, useState} from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import {Card, IconButton, Divider, Typography,Box, CssBaseline, Toolbar, List, AppBar as MuiAppBar, Drawer as MuiDrawer  } from '@mui/material';
-import {Menu, ChevronLeft, Logout } from '@mui/icons-material'
+import {
+  IconButton,
+  Divider,
+  Typography,
+  Box,
+  TextField,
+  InputAdornment,
+  CssBaseline,
+  Toolbar,
+  List,
+  AppBar as MuiAppBar,
+  Drawer as MuiDrawer,
+} from '@mui/material';
+import {Menu, ChevronLeft, Logout, Search } from '@mui/icons-material'
+import { Avatar } from '@mui/material';
+import RecordPaper from './RecordPaper';
 import { menuListItems} from './menuList.js';
 import "../App.css";
 import {useNavigate} from "react-router-dom";
@@ -53,6 +67,50 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+
+const MainContent = styled('div')({
+  marginLeft: drawerWidth,
+  padding: '16px',
+});
+
+const ProfileInfo = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  padding: '16px',
+});
+
+const ProfileAvatar = styled(Avatar)({
+  width: '60px',
+  height: '60px', // Increase avatar size
+  backgroundColor: 'grey', // Blue color for the background
+  color: 'white', // White font color for the avatar
+});
+
+const ProfileName = styled(Typography)({
+  marginLeft: '8px',
+  fontSize: '24px', // Increase username font size
+  flexGrow: 1,
+  color: '#1C3966', // Blue font color for the username
+});
+
+const IDLabel = styled(Typography)({
+  marginLeft: '16px',
+  alignSelf: 'center',
+});
+
+const records = [
+  {
+    title: 'Record Title',
+    date: 'January 1, 2023',
+    description: 'Recipient description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
+    title: 'Record Title 2',
+    date: 'February 15, 2023',
+    description: 'Another recipient description. Sed ut perspiciatis unde omnis iste natus error.',
+  },
+  // Add more records as needed
+];
 
 const defaultTheme = createTheme();
 
@@ -150,11 +208,41 @@ export default function Recipients() {
           }}
         >
           <Toolbar />
-          
  {/* place body content here */}
-
+ <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+            <MainContent>
+              {/* Main Content */}
+              <Toolbar />
+              {/* Profile Info (Top Left Corner) */}
+              <ProfileInfo>
+                <ProfileAvatar>S</ProfileAvatar>
+                <ProfileName>John Doe</ProfileName>
+                <IDLabel>ID: 12345</IDLabel>
+              </ProfileInfo>
+              <Divider sx={{ width: '100%', my: '16px' }} />
+              <TextField
+                label="Search"
+                variant="outlined"
+                fullWidth
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{ mb: '16px' }}
+              />
+              <Divider sx={{ width: '100%', my: '16px' }} />
+              {/* Map the list of records to generate RecordPaper components */}
+              {records.map((record, index) => (
+                <RecordPaper key={index} record={record} />
+              ))}
+            </MainContent>
+          </Box>
         </Box>
       </Box>
     </ThemeProvider>
   );
 }
+
