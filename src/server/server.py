@@ -84,7 +84,33 @@ def get_patient_profiles():
     resp = make_response(jsonify(data), 200)
     return resp
 
-
+@app.post('/provider/patient')
+def add_provider_patient():
+    request_data = request.get_json()
+    fhir_request_data = {
+        "resourceType": "Patient",
+        "name": [
+            {
+            "use": "official",
+            "family": request_data["last_name"],
+            "given": [
+                request_data["first_name"]
+            ]
+            }
+        ],
+        "gender": request_data["gender"],
+        "birthDate": request_data["dob"],
+    }
+    patient = p.Patient.create(p.Patient(fhir_request_data), myclient.server)
+    resp_data = {
+        'request_type': 'provider-patient',
+        'first_name': patient["name"][0]["given"],
+        'last_name': patient["name"][0]["family"],
+        'dob': patient["birthDate"],
+        'gender': patient["gender"],
+    }
+    resp = make_response(jsonify(resp_data), 200)
+    return resp
 
 # start the app
 if '__main__' == __name__:
