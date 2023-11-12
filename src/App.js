@@ -9,6 +9,7 @@ import Donors from './provider/Donors';
 import Recipients from './provider/Recipients';
 import Test from './patient/Test';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import NewPatient from './provider/NewPatient';
 function App() {
   return (
     <>  
@@ -29,6 +30,7 @@ function App() {
       {/*  Provider routes*/}
       <Route exact path="/donors" element={<Donors />} />
       <Route exact path="/recipients" element={<Recipients />} />
+      <Route exact path="/new-patient" element={<NewPatient />} />
       </Routes>
       </Router>
     </>
