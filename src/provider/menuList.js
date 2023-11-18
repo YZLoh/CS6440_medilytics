@@ -8,7 +8,7 @@ export const menuListItems = (
     <Link to="/donors" className='formatted-link'>
       <ListItemButton>
         <ListItemIcon>
-          <Icon icon="ri:user-received-2-fill" />
+          <Icon icon="ri:user-received-2-fill"  width="30" height="30"/>
         </ListItemIcon>
 
         <ListItemText primary="Donors" />
@@ -17,7 +17,7 @@ export const menuListItems = (
     <Link to="/recipients" className='formatted-link'>
       <ListItemButton>
         <ListItemIcon>
-          <Icon icon="ri:user-received-2-fill" hFlip={true} />
+          <Icon icon="ri:user-received-2-fill" hFlip={true} width="30" height="30" />
         </ListItemIcon>
         <ListItemText primary="Recipients" className='formatted-link' />
       </ListItemButton>
@@ -25,7 +25,7 @@ export const menuListItems = (
     <Link to="/new-patient" className='formatted-link'>
       <ListItemButton>
         <ListItemIcon>
-          <Icon icon="ri:user-received-2-fill" hFlip={true} />
+        <Icon icon="mingcute:user-add-fill" width="30" height="30" />
         </ListItemIcon>
         <ListItemText primary="New Patient" className='formatted-link' />
       </ListItemButton>

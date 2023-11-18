@@ -2,13 +2,27 @@ from fhirclient import client
 from flask import Flask, jsonify, make_response, request, session
 from pprint import pprint
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 app = Flask(__name__)
 CORS(app,origins="http://localhost:3000")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
 client_defaults = {
     'app_id': 'my_web_app',
     'api_base': 'https://fhir.collablynk.com/edifecs/fhir/R4' # open test servers: 'https://kefhir.kodality.dev/fhir/' , 'https://fhir.collablynk.com/edifecs/fhir/R4', 'http://hapi.fhir.org/baseR4' 
 }
+
+class users(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(50), unique=True, nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+    role = db.Column(db.String(100), nullable=False)
 
 def _get_client():
     return client.FHIRClient(settings=client_defaults)
@@ -25,19 +39,33 @@ def hello_world():
 # auth API
 @app.post('/auth/login')
 def login_post():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+    userExists = users.query.filter_by(email=email).first()
+    passExists = users.query.filter_by(password=password).first()
+    
+    # edit hash later
+    if userExists and passExists:
+        # User authentication successful
+        role = userExists.role
+        return jsonify({'role': role})
+    else:
+        return jsonify({'message': 'Invalid username or password'}), 401
+
     # hard coded token generation in the absence of an auth server
-    if (not request.is_json):
-        return make_response(jsonify({'status': 'fail', 'message': 'Request must be JSON.'}), 400)
+    # if (not request.is_json):
+    #     return make_response(jsonify({'status': 'fail', 'message': 'Request must be JSON.'}), 400)
 
-    request_data = request.get_json()
-    data = {}
-    resp = make_response(jsonify(data), 200)
+    # request_data = request.get_json()
+    # data = {}
+    # resp = make_response(jsonify(data), 200)
 
-    resp.headers['user_type'] = request_data['user_type']
-    resp.headers['user_id'] = request_data['user_type'] + '001'
+    # resp.headers['user_type'] = request_data['user_type']
+    # resp.headers['user_id'] = request_data['user_type'] + '001'
 
-    resp.headers['Authorization'] = 'Bearer verylong7812fake34token56longer910'
-    return resp
+    # resp.headers['Authorization'] = 'Bearer verylong7812fake34token56longer910'
+    # return resp
 
 @app.post('/auth/logout')
 def logout_post():
