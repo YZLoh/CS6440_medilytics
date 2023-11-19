@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "3d4aff07-680e-420f-8b09-b8effb419077",
+		"name": "gt_medilytics",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30808669"
+	},
+	"item": [
+		{
+			"name": "[provider] get recipients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/provider/recipients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"provider",
+						"recipients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[opo] get pending",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "user-id",
+						"value": "002",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8088/opo/pending",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"opo",
+						"pending"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[opo] get allocated",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "user-id",
+						"value": "005",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8088/opo/allocated",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"opo",
+						"allocated"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[opo] add record",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "user-id",
+						"value": "005",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8088/opo/record",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"opo",
+						"record"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[provider] get donors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/provider/donors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"provider",
+						"donors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[patient] get updates",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "user-id",
+						"value": "002",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8088/patient/updates",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"patient",
+						"updates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[patient] get profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/patient/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"patient",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[provider] add patient",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request_type\": \"provider-patient\",\r\n    \"first_name\": \"Level\",\r\n    \"last_name\": \"One\",\r\n    \"dob\": \"1980-01-02\",\r\n    \"gender\": \"male\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/provider/patient",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"provider",
+						"patient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[auth] login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_type\": \"provider\",\r\n    \"auth_type\": \"password\",\r\n    \"username\": \"adam0123\",\r\n    \"password\": \"complexpassword\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[auth] logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "user_type",
+						"value": "provider",
+						"type": "text"
+					},
+					{
+						"key": "user_id",
+						"value": "provider001",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_type\": \"provider\",\r\n    \"auth_type\": \"password\",\r\n    \"username\": \"adam0123\",\r\n    \"password\": \"complexpassword\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
