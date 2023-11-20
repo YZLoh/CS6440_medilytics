@@ -16,6 +16,7 @@ const RecipientRecordPaper = ({ record }) => {
       </div>
       <Typography>ID: {record.patient_id}</Typography>
       <Typography>Organ: {record.organ}</Typography>
+      <Typography>Recipient Status: {record.recipient_status}</Typography>
       <Typography>Latest update: {record.recipient_status_message}</Typography>
     </Paper>
   );
