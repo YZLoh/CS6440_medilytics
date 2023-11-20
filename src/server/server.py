@@ -61,8 +61,13 @@ def login_post():
     # data = {}
     # resp = make_response(jsonify(data), 200)
 
+
+    resp.headers['user-type'] = request_data['user-type']
+    resp.headers['user-id'] = request_data['user-type'] + '001'
+
     # resp.headers['user_type'] = request_data['user_type']
     # resp.headers['user_id'] = request_data['user_type'] + '001'
+
 
     # resp.headers['Authorization'] = 'Bearer verylong7812fake34token56longer910'
     # return resp
@@ -70,17 +75,44 @@ def login_post():
 @app.post('/auth/logout')
 def logout_post():
     resp = make_response('', 200) # 204 should be used if there is no content
-    resp.headers.remove('user_type')
-    resp.headers.remove('user_id')
+    resp.headers.remove('user-type')
+    resp.headers.remove('user-id')
     return resp
 
 import fhirclient.models.patient as p
 import fhirclient.models.observation as obs
 
+# Patient APIs
+@app.get("/patient/updates")
+def get_patient_updates():
+    data = request.get_data()
+    patient_id = request.headers.get('user-id')
+    print(str(data))
+    # hard-coded
+    data = {
+        'data_type': 'patient-updates',
+        'patient_id': patient_id,
+        'size': 2,
+        'data_list': [
+            {
+                'id': 0,
+                'datetime': '2023-10-25T14:43:16.776Z',
+                'message': 'Your donor application has been rejected. Reason: Expired checkup result.'
+            },
+            {
+                'id': 1,
+                'datetime': '2023-09-25T14:43:16.776Z',
+                'message': 'Your donor application is submitted and under review.'
+            },
+        ],
+    }
+    resp = make_response(jsonify(data), 200)
+    return resp
+
 @app.get("/patient/profile")
 def get_patient_profiles():
-    if 'user_id' in request.headers:
-        patient_id = request.headers['user_id']
+    if 'user-id' in request.headers:
+        patient_id = request.headers['user-id']
     else:
         patient_id = '6005' # kodality: 1214, edifecs: 6005, hapi: '1516131' 
     patient = p.Patient.read(patient_id, myclient.server)
@@ -112,6 +144,7 @@ def get_patient_profiles():
     resp = make_response(jsonify(data), 200)
     return resp
 
+# Provider APIs
 @app.post('/provider/patient')
 def add_provider_patient():
     request_data = request.get_json()
@@ -138,6 +171,225 @@ def add_provider_patient():
         'gender': patient["gender"],
     }
     resp = make_response(jsonify(resp_data), 200)
+    return resp
+
+@app.get("/provider/donors")
+def get_provider_donors():
+    provider_id = request.headers.get('user-id')
+    # hard-coded
+    data = {
+        'data_type': 'provider-donors',
+        'provider_id': provider_id,
+        'size': 2,
+        'data_list': [
+            {
+                'patient_id': '0001',
+                'basics': {
+                    'first_name': 'Joe',
+                    'last_name': 'Doe',
+                    'dob': '1980-01-02',
+                    'gender': 'male',
+                },
+                'donor_code': {
+                    'url': 'http://terminology.hl7.org/CodeSystem/v2-0316',
+                    'code': 'I',
+                    'display': 'No, patient is not a documented donor, but information was provided',
+                },
+                'donor_status': 'rejected',
+                'donor_status_message': 'Reason: Expired checkup result.',
+                'organ': 'Kidney',
+                'datetime_created': '2023-08-25T14:43:16.776Z',
+                'datetime_updated': '2023-10-25T14:43:16.776Z'
+            },
+            {
+                'patient_id': '0002',
+                'basics': {
+                    'first_name': 'Adam',
+                    'last_name': 'Smith',
+                    'dob': '1990-01-02',
+                    'gender': 'male',
+                },
+                'donor_code': {
+                    'url': 'http://terminology.hl7.org/CodeSystem/v2-0316',
+                    'code': 'Y',
+                    'display': 'Yes, patient is a documented donor and documentation is on file',
+                },
+                'donor_status': 'pending_surgery',
+                'donor_status_message': 'A receipient is matched. Surgery is scheduled on 2022-09-22.',
+                'organ': 'Kidney',
+                'datetime_created': '2022-01-25T14:43:16.776Z',
+                'datetime_updated': '2023-09-21T14:43:16.776Z'
+            },
+        ]
+    }
+    resp = make_response(jsonify(data), 200)
+    return resp
+
+@app.get("/provider/recipients")
+def get_provider_receipients():
+    provider_id = request.headers.get('user-id')
+    # hard-coded
+    data = {
+        'data_type': 'provider-recipient',
+        'provider_id': provider_id,
+        'size': 2,
+        'data_list': [
+            {
+                'patient_id': '0003',
+                'basics': {
+                    'first_name': 'Jack',
+                    'last_name': 'Smith',
+                    'dob': '1982-05-02',
+                    'gender': 'male',
+                },
+                'recipient_status': 'pending_match',
+                'recipient_status_message': 'Application approved. Pending match',
+                'organ': 'Kidney',
+                'datetime_created': '2023-08-25T14:43:16.776Z',
+                'datetime_updated': '2023-10-25T14:43:16.776Z'
+            },
+            {
+                'patient_id': '0004',
+                'basics': {
+                    'first_name': 'Beth',
+                    'last_name': 'Smith',
+                    'dob': '1995-01-02',
+                    'gender': 'female',
+                },
+                'donor_status': 'pending_surgery',
+                'donor_status_message': 'A donor is matched. Surgery is scheduled on 2022-09-24.',
+                'organ': 'Kidney',
+                'datetime_created': '2022-01-25T14:43:16.776Z',
+                'datetime_updated': '2023-09-21T14:43:16.776Z'
+            },
+        ]
+    }
+    resp = make_response(jsonify(data), 200)
+    return resp
+
+
+# OPO APIs
+@app.get("/opo/pending")
+def get_opo_pending():
+    opo_id = request.headers.get('user-id')
+    # hard-coded
+    data = {
+        'data_type': 'opo-pending',
+        'opo_id': opo_id,
+        'size': 1,
+        'data_list': [
+            {
+                'request_id': '0003',
+                'receipient_basics': {
+                    'first_name': 'Level',
+                    'last_name': 'Two',
+                    'dob': '1980-01-02',
+                    'gender': 'male',
+                    'patient_id': '0005',
+                    'aborhd': {
+                        'display': 'A RhD Positive'
+                    },
+                },
+                'organ_requested': 'Kidney',
+                'provider_id': '001',
+                'provider_name': 'National Hospital',
+                'request_status': 'pending_review',
+                'datetime_created': '2023-10-25T14:43:16.776Z',
+                'datetime_updated': '2023-10-25T14:45:16.776Z',
+                'documents_attached': [
+                    '0005_002',
+                ],
+            }
+        ]
+    }
+    resp = make_response(jsonify(data), 200)
+    return resp
+
+@app.get("/opo/allocated")
+def get_opo_allocated():
+    opo_id = request.headers.get('user-id')
+    # hard-coded
+    data = {
+        'data_type': 'opo-allocated',
+        'opo_id': opo_id,
+        'size': 1,
+        'data_list': [
+            {
+                'request_id': '0002',
+                'receipient_basics': {
+                    'first_name': 'Level',
+                    'last_name': 'Two',
+                    'dob': '1980-02-02',
+                    'gender': 'male',
+                    'patient_id': '0006',
+                    'aborhd': {
+                        'is_present': True,
+                        'display': 'A RhD Positive'
+                    },
+                },
+                'donor_basics': {
+                    'first_name': 'Level',
+                    'last_name': 'Three',
+                    'dob': '1980-02-03',
+                    'gender': 'male',
+                    'patient_id': '0007',
+                    'aborhd': {
+                        'is_present': True,
+                        'display': 'A RhD Positive'
+                    },
+                },
+                'organ_requested': 'Kidney',
+                'provider_id': '001',
+                'provider_name': 'National Hospital',
+                'request_status': 'pending_surgery',
+                'request_status_display': 'A match was found on 2023-10-25, pending surgery',
+                'datetime_created': '2023-10-24T14:43:16.776Z',
+                'datetime_updated': '2023-10-25T14:45:16.776Z',
+                'documents_attached': [
+                    '0005_002',
+                ],
+                'procurement_record_id': '0001',
+            }
+        ]
+    }
+    resp = make_response(jsonify(data), 200)
+    return resp
+
+@app.post('/opo/record')
+def add_opo_record():
+    opo_id = request.headers.get('user-id')
+    # hard-coded
+    data = {
+        'data_type': 'opo-procurement',
+        'opo_id': opo_id,
+        'receipient_basics': {
+            'first_name': 'Level',
+            'last_name': 'Two',
+            'dob': '1980-02-02',
+            'gender': 'male',
+            'patient_id': '0006',
+            'aborhd': {
+                'is_present': True,
+                'display': 'A RhD Positive'
+            },
+        },
+        'donor_basics': {
+            'first_name': 'Level',
+            'last_name': 'Three',
+            'dob': '1980-02-03',
+            'gender': 'male',
+            'patient_id': '0007',
+            'aborhd': {
+                'is_present': True,
+                'display': 'A RhD Positive'
+            },
+        },
+        'request_id': '0002',
+        'organ_requested': 'Kidney',
+        'approved_by': 'Jane Joe',
+    }
+
+    resp = make_response(jsonify(data), 200)
     return resp
 
 # start the app
