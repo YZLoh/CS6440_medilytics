@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Contact from './Contact';
 import About from './About';
 import Features from './Features';
+import { handleLogin } from './handleLogin';
 
 function Copyright(props) {
   return (
@@ -82,7 +83,7 @@ function Landing() {
               enabling healthcare professionals to make informed <br /> decisions and improve patient outcomes
             </Typography>
             <div style={{ display: 'flex' }}>
-              <Button sx={buttonStyle} onClick={() => scrollToSection('about')}>
+              <Button sx={buttonStyle} onClick={login}>
                 Get Started
               </Button>
               <Button sx={buttonStyle} onClick={() => scrollToSection('features')}>

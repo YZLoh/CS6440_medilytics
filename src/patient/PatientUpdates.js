@@ -5,7 +5,7 @@ import {Menu, ChevronLeft, Logout } from '@mui/icons-material'
 import { menuListItems} from './menuList.js';
 import "../App.css";
 import {useNavigate} from "react-router-dom";
-import axios from '../api/axios';
+import {axiosSetup2} from '../api/axios';
 
 const drawerWidth = 240;
 
@@ -62,7 +62,7 @@ export default function Dashboard() {
   const [data, setData] = useState([]);
 
 useEffect(() => {
-    axios.get('/patient/updates')
+  axiosSetup2.get('/patient/updates')
     .then(response => {
         setData(response.data.data_list);
      

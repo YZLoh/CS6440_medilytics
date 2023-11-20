@@ -70,8 +70,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 const MainContent = styled('div')({
-  marginLeft: drawerWidth,
+  marginLeft: '20px',
   padding: '16px',
+  width:'50%'
 });
 
 const ProfileInfo = styled('div')({

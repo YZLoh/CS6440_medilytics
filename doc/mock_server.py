@@ -177,4 +177,4 @@ def add_provider_patient():
 
 # start the app
 if '__main__' == __name__:
-    app.run(debug=True, port=8088)
+    app.run(debug=True, port=8089)
