@@ -1,26 +1,27 @@
 import React from 'react';
 import { Paper, Typography } from '@mui/material';
 import { Event } from '@mui/icons-material';
-
-const DonorRecordPaper = ({ record }) => {
+import { Icon } from '@iconify/react';
+const PendingRecordPaper = ({ record }) => {
   return (
     <Paper sx={{ p: '16px', bgcolor: '#D3D3D3', mb: '16px', borderLeft: '30px solid #C91C23' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant="h5" sx={{ color: '#1C3966', fontWeight: 'bold' }}>
-          {record.basics.first_name} {record.basics.last_name}
+        {record.organ_requested}
         </Typography>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Event sx={{ marginRight: '8px' }} />
+        <Icon icon="mingcute:hospital-fill" width="30" height="30" />
+          <Typography>{record.provider_name}</Typography>
+          <Event sx={{ marginLeft: '8px' }} />
           <Typography>Date: {record.datetime_created}</Typography>
         </div>
       </div>
-      <Typography>ID: {record.patient_id}</Typography>
-      <Typography>Organ: {record.organ}</Typography>
-      <Typography>Donor Status: {record.donor_status}</Typography>
-      <Typography>Status Reason: {record.donor_code.display}</Typography>
-      <Typography>Latest update: {record.donor_status_message}</Typography>
+      <Typography>ID: {record.request_id}</Typography>
+      <Typography>Recipient: {record.receipient_basics.aborhd.display}</Typography>
+      <Typography>ID: {record.request_id}</Typography>
+      {/* add remaining info here */}
     </Paper>
   );
 };
 
-export default DonorRecordPaper;
+export default PendingRecordPaper;
