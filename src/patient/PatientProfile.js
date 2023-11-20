@@ -4,7 +4,7 @@ import {Card, IconButton, Divider, Typography,Box, CssBaseline, Toolbar, List, A
 import {Menu, ChevronLeft, Logout } from '@mui/icons-material'
 import { menuListItems} from './menuList.js';
 import {useNavigate} from "react-router-dom";
-import axios from '../api/axios';
+import {axiosSetup1} from '../api/axios';
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -60,12 +60,14 @@ export default function Dashboard() {
     const [patientData, setPatientData] = useState(null);
 
     useEffect(() => {
-        axios.get('/patient/profile')
+    
+      axiosSetup1.get('/patient/profile')
         .then(response => {
           setPatientData(response.data);
             
          
         }).catch(error => {
+          console.log(axiosSetup1)
             console.error('Error:', error);
         });},[]);
         

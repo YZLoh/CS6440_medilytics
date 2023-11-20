@@ -23,10 +23,16 @@ Objective: xyz
 **Running the Project Locally**   
 Install all node modules: npm install  
 Install missing python modules: i.e. pip install fhirclient  
-Launch locally (http://localhost:3000) : npm start  
-Run server: cd src/server and run server.py
+Launch locally (http://localhost:3000) : npm start.   
+Run test-server (http://localhost:8088): cd src/server and run server.py  
+Run mock-server (http://localhost:8089): cd doc and run mock_server.py
 
 (working routes : Patient - /patient-profile , /patient-update , /login || Provider - /donors, /recipients || OPO - /pending-donations, /allocated-donations, /donation-records)  
+
+Test accounts  
+Provider: john@mail.com provider1234    
+Patient: jane@mail.com patient1234  
+OPO: jack@mail.com opo1234     
 
 **Live Demo**   
 TBA

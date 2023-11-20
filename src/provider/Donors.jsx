@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import React, { useEffect, useState } from "react";
+import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   IconButton,
   Divider,
@@ -12,141 +12,143 @@ import {
   List,
   AppBar as MuiAppBar,
   Drawer as MuiDrawer,
-} from '@mui/material';
-import {Menu, ChevronLeft, Logout, Search } from '@mui/icons-material'
-import { Avatar } from '@mui/material';
-import RecordPaper from './RecordPaper';
-import { menuListItems} from './menuList.js';
+} from "@mui/material";
+import { Menu, ChevronLeft, Logout, Search } from "@mui/icons-material";
+import { Avatar } from "@mui/material";
+import DonorRecordPaper from "./DonorRecordPaper";
+import { menuListItems } from "./menuList.js";
 import "../App.css";
-import {useNavigate} from "react-router-dom";
-import axios from '../api/axios';
+import { useNavigate } from "react-router-dom";
+import { axiosSetup2 } from "../api/axios";
+import { Icon } from "@iconify/react";
 
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
+  transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    '& .MuiDrawer-paper': {
-      position: 'relative',
-      whiteSpace: 'nowrap',
-      width: drawerWidth,
-      transition: theme.transitions.create('width', {
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  "& .MuiDrawer-paper": {
+    position: "relative",
+    whiteSpace: "nowrap",
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    boxSizing: "border-box",
+    ...(!open && {
+      overflowX: "hidden",
+      transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
+        duration: theme.transitions.duration.leavingScreen,
       }),
-      boxSizing: 'border-box',
-      ...(!open && {
-        overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        width: theme.spacing(7),
-        [theme.breakpoints.up('sm')]: {
-          width: theme.spacing(9),
-        },
-      }),
-    },
-  }),
-);
+      width: theme.spacing(7),
+      [theme.breakpoints.up("sm")]: {
+        width: theme.spacing(9),
+      },
+    }),
+  },
+}));
 
-
-const MainContent = styled('div')({
-  marginLeft: drawerWidth,
-  padding: '16px',
+const MainContent = styled("div")({
+  marginLeft: " 20px",
+  padding: "16px",
+  width:'80%'
 });
 
-const ProfileInfo = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  padding: '16px',
+const ProfileInfo = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  padding: "16px",
 });
 
 const ProfileAvatar = styled(Avatar)({
-  width: '60px',
-  height: '60px', // Increase avatar size
-  backgroundColor: 'grey', // Blue color for the background
-  color: 'white', // White font color for the avatar
+  width: "60px",
+  height: "60px", // Increase avatar size
+  backgroundColor: "grey", // Blue color for the background
+  color: "white", // White font color for the avatar
 });
 
 const ProfileName = styled(Typography)({
-  marginLeft: '8px',
-  fontSize: '24px', // Increase username font size
+  marginLeft: "8px",
+  fontSize: "24px", // Increase username font size
   flexGrow: 1,
-  color: '#1C3966', // Blue font color for the username
+  color: "#1C3966", // Blue font color for the username
 });
 
 const IDLabel = styled(Typography)({
-  marginLeft: '16px',
-  alignSelf: 'center',
+  marginLeft: "16px",
+  alignSelf: "center",
 });
 
-const records = [
-  {
-    title: 'Record Title',
-    date: 'January 1, 2023',
-    description: 'Donor description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  },
-  {
-    title: 'Record Title 2',
-    date: 'February 15, 2023',
-    description: 'Another donor description. Sed ut perspiciatis unde omnis iste natus error.',
-  },
-  // Add more records as needed
-];
+// const records = [
+//   {
+//     title: 'Record Title',
+//     date: 'January 1, 2023',
+//     description: 'Donor description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+//   },
+//   {
+//     title: 'Record Title 2',
+//     date: 'February 15, 2023',
+//     description: 'Another donor description. Sed ut perspiciatis unde omnis iste natus error.',
+//   },
+//   // Add more records as needed
+// ];
 
 const defaultTheme = createTheme();
 
 export default function Donors() {
-
   // API call to mock updates
-  const [data, setData] = useState([]);
-
-// useEffect(() => {
-//     axios.get('/patient/updates')
-//     .then(response => {
-//         setData(response.data.data_list);
-     
-//     }).catch(error => {
-//         console.error('Error:', error);
-//     });},[]);
-  //  console.log(data.data_list)
+  const [records, setRecords] = useState([]);
+  useEffect(() => {
+    axiosSetup2
+      .get("/provider/donors")
+      .then((response) => {
+        setRecords(response.data.data_list);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
- 
   };
 
   const navigate = useNavigate();
-  const logout =() => {
-    navigate('/login');
-  }
+  const logout = () => {
+    navigate("/login");
+  };
   return (
-    
     <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ display: 'flex' }}  >
+      <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open} style={{backgroundColor:"#1C3966"}}>
+        <AppBar
+          position="absolute"
+          open={open}
+          style={{ backgroundColor: "#1C3966" }}
+        >
           <Toolbar
             sx={{
-              pr: '24px', 
+              pr: "24px",
             }}
           >
             <IconButton
@@ -155,13 +157,13 @@ export default function Donors() {
               aria-label="open drawer"
               onClick={toggleDrawer}
               sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
+                marginRight: "36px",
+                ...(open && { display: "none" }),
               }}
             >
               <Menu />
             </IconButton>
-            <Typography 
+            <Typography
               component="h1"
               variant="h6"
               color="inherit"
@@ -171,18 +173,16 @@ export default function Donors() {
               Donors
             </Typography>
             <IconButton color="inherit" onClick={logout}>
-            
-                <Logout />
-              
+              <Logout />
             </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
               px: [1],
             }}
           >
@@ -191,58 +191,60 @@ export default function Donors() {
             </IconButton>
           </Toolbar>
           <Divider />
-           <List component="nav">
-            {menuListItems}
-          </List> 
+          <List component="nav">{menuListItems}</List>
         </Drawer>
         <Box
           component="main"
           sx={{
             backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
+              theme.palette.mode === "light"
                 ? theme.palette.grey[100]
                 : theme.palette.grey[900],
             flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
+            height: "100vh",
+            overflow: "auto",
           }}
         >
           <Toolbar />
- {/* place body content here */}
- <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-            <MainContent>
-              {/* Main Content */}
-              <Toolbar />
-              {/* Profile Info (Top Left Corner) */}
-              <ProfileInfo>
-                <ProfileAvatar>S</ProfileAvatar>
-                <ProfileName>John Doe</ProfileName>
-                <IDLabel>ID: 12345</IDLabel>
-              </ProfileInfo>
-              <Divider sx={{ width: '100%', my: '16px' }} />
-              <TextField
-                label="Search"
-                variant="outlined"
-                fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Search />
-                    </InputAdornment>
-                  ),
-                }}
-                sx={{ mb: '16px' }}
+          {/* place body content here */}
+          {/* <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '20px'}}> */}
+          <MainContent>
+            {/* Main Content */}
+            <Toolbar />
+            {/* Profile Info (Top Left Corner) */}
+            <ProfileInfo>
+              <Icon
+                icon="mdi:user-circle"
+                color="grey"
+                width="60"
+                height="60"
               />
-              <Divider sx={{ width: '100%', my: '16px' }} />
-              {/* Map the list of records to generate RecordPaper components */}
-              {records.map((record, index) => (
-                <RecordPaper key={index} record={record} />
-              ))}
-            </MainContent>
-          </Box>
+              <ProfileName>John Doe</ProfileName>
+              <IDLabel>ID: 12345</IDLabel>
+            </ProfileInfo>
+            <Divider sx={{ width: "100%", my: "16px" }} />
+            <TextField
+              label="Search"
+              variant="outlined"
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search />
+                  </InputAdornment>
+                ),
+              }}
+              sx={{ mb: "16px" }}
+            />
+            <Divider sx={{ width: "100%", my: "16px" }} />
+            {/* Map the list of records to generate RecordPaper components */}
+            {records.map((record, index) => (
+              <DonorRecordPaper key={index} record={record} />
+            ))}
+          </MainContent>
+          {/* </Box> */}
         </Box>
       </Box>
     </ThemeProvider>
   );
 }
-
