@@ -18,7 +18,7 @@ function About() {
   return (
     <Box sx={boxStyle}>
       <Typography variant="h6" sx={titleStyle}>
-        Transparent Open Source Tranplant System
+        Transparent Open Source Transplant System
       </Typography>
       <Typography>
         As noted by the CDC, there exists a clear lack of organ donors. As noted by the CDC, there are around 100,000 people on the active waiting list for organs, but only approximately
