@@ -1,0 +1,4 @@
+#### Technical and/or User Manual
+- Provide information on deployment of the application.
+- Provide basic user instructions in order to utilize the application fully and show off all features.
+- Special Instructions for Grading (“navigate to this URL...type in the following...click on this...etc.”) for the instructing team to follow in order to successfully deploy and run your application (in the event it is necessary, trust us it happens every semester). Include any special build or launch instructions. Please do not forget login information or anything such as FHIR patient IDs that may be needed.
