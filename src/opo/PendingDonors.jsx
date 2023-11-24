@@ -114,6 +114,7 @@ export default function PendingDonors() {
 
   const navigate = useNavigate();
   const logout = () => {
+    localStorage.removeItem('savedRole');
     navigate("/login");
   };
   return (
