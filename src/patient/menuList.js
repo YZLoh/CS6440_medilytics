@@ -2,7 +2,7 @@ import * as React from 'react';
 import {ListItemButton,ListItemText, ListItemIcon} from '@mui/material';
 import {Notifications, TextSnippet} from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import '../App.css';
+import '../App.css';  
 export const menuListItems = (
   <React.Fragment>
     <Link to="/patient-profile" className='formatted-link'>
