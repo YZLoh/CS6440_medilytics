@@ -65,16 +65,6 @@ export default function DonationRecords() {
   // API call to mock updates
   const [data, setData] = useState([]);
 
-// useEffect(() => {
-//     axios.get('/patient/updates')
-//     .then(response => {
-//         setData(response.data.data_list);
-     
-//     }).catch(error => {
-//         console.error('Error:', error);
-//     });},[]);
-  //  console.log(data.data_list)
-
 
   const [searchQuery, setSearchQuery] = useState('');
   const [items] = useState([
@@ -252,6 +242,7 @@ export default function DonationRecords() {
 
   const navigate = useNavigate();
   const logout =() => {
+    localStorage.removeItem('savedRole');
     navigate('/login');
   }
   return (

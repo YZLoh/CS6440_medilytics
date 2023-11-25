@@ -136,6 +136,7 @@ export default function Recipients() {
 
   const navigate = useNavigate();
   const logout = () => {
+    localStorage.removeItem('savedRole');
     navigate("/login");
   };
   return (
