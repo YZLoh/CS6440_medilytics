@@ -7,6 +7,7 @@ import PatientProfile from "./patient/PatientProfile";
 import PatientUpdates from "./patient/PatientUpdates";
 import Donors from "./provider/Donors";
 import Recipients from "./provider/Recipients";
+import PageNotFound from "./components/PageNotFound";
 import {
   BrowserRouter as Router,
   Route,
@@ -119,6 +120,8 @@ function App() {
               />
             }
           />
+
+          <Route path="*" element={<PageNotFound/>}/>
         </Routes>
       </Router>
     </>
