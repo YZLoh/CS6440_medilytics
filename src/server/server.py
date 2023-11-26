@@ -8,14 +8,22 @@ import os
 
 load_dotenv()
 app = Flask(__name__)
-CORS(app,origins="http://localhost:3000")
+
+additional_cors_origin = os.getenv('CORS_ORIGIN')
+fhir_base = os.getenv('FHIR_BASE', default='https://fhir.collablynk.com/edifecs/fhir/R4')
+server_host = os.getenv('SERVER_HOST', default='0.0.0.0')
+
+cors_origins = ["http://localhost:3000"]
+cors_origins += additional_cors_origin if additional_cors_origin is not None else []
+CORS(app,origins=cors_origins)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 client_defaults = {
     'app_id': 'my_web_app',
-    'api_base': 'https://fhir.collablynk.com/edifecs/fhir/R4' # open test servers: 'https://kefhir.kodality.dev/fhir/' , 'https://fhir.collablynk.com/edifecs/fhir/R4', 'http://hapi.fhir.org/baseR4' 
+    'api_base': fhir_base # open test servers: 'https://fhir.collablynk.com/edifecs/fhir/R4', 'https://kefhir.kodality.dev/fhir/' , 'https://fhir.collablynk.com/edifecs/fhir/R4', 'http://hapi.fhir.org/baseR4' 
 }
 
 class users(db.Model):
@@ -394,4 +402,4 @@ def add_opo_record():
 
 # start the app
 if '__main__' == __name__:
-    app.run(debug=True, port=8088)
+    app.run(debug=True, host=server_host, port=8088)
