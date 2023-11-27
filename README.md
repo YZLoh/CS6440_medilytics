@@ -1,20 +1,26 @@
 ### Medilytics
+
 **Team 29**
- Mengci Wu, Mika Yoshimura, Ying Zhe Loh
+Mengci Wu, Mika Yoshimura, Ying Zhe Loh
 
 **Target Audience**
----
-User type:Patient    
+---------------
+
+User type:Patient
 Objective: xyz
+--------------
+
 ---
----
-User type:Provider  
+
+User type:Provider
 Objective: xyz
+--------------
+
 ---
----
-User type:Organ Procurement Organization User(OPO)   
+
+User type:Organ Procurement Organization User(OPO)
 Objective: xyz
----
+--------------
 
 **Technology Used**
 ![JavaScript](https://img.shields.io/badge/-JavaScript-000000?style=flat&logo=javascript)
@@ -33,12 +39,25 @@ Unless the .env file is missing, no modifications are required prior to running.
 
 (working routes : Patient - /patient-profile , /patient-update , /login || Provider - /donors, /recipients || OPO - /pending-donations, /allocated-donations, /donation-records)    
 
-Test accounts  
-Provider: john@mail.com provider1234    
-Patient: jane@mail.com patient1234  
-OPO: jack@mail.com opo1234     
+Test accounts
+Provider: john@mail.com provider1234
+Patient: jane@mail.com patient1234
+OPO: jack@mail.com opo1234
 
-**Live Demo**   
+**Run server container**
+
+build
+
+`docker build -t <your_tag> .`
+
+run
+
+`docker run --env-file .\.env -p 8088:8088 -d <your_tag>`
+
+**Deployed URL**
+
+Backend service: [https://medilytics-py.onrender.com](https://medilytics-py.onrender.com)
+
+**Live Demo**
 TBA
-
 
