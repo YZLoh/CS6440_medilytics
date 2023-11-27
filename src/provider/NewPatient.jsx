@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { axiosSetup1 } from "../api/axios";
+import  axios  from "../api/axios";
 
 const drawerWidth = 240;
 
@@ -137,7 +137,7 @@ export default function NewPatient() {
   const [patientValues, setPatientValues] = useState(patientDefaultValues);
 
   const handleCreateButtonClick = (e) => {
-    axiosSetup1.post(
+    axios.post(
       '/provider/patient',
       {
         "request_type": "provider-patient",

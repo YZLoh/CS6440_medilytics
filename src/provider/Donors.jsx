@@ -19,7 +19,7 @@ import DonorRecordPaper from "./DonorRecordPaper";
 import { menuListItems } from "./menuList.js";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
-import { axiosSetup1 } from "../api/axios";
+import  axios  from "../api/axios";
 import { Icon } from "@iconify/react";
 
 const drawerWidth = 240;
@@ -119,7 +119,7 @@ export default function Donors() {
   // API call to mock updates
   const [records, setRecords] = useState([]);
   useEffect(() => {
-    axiosSetup1
+    axios
       .get("/provider/donors")
       .then((response) => {
         setRecords(response.data.data_list);

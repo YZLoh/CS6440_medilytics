@@ -13,7 +13,7 @@ additional_cors_origin = os.getenv('CORS_ORIGIN')
 fhir_base = os.getenv('FHIR_BASE', default='https://fhir.collablynk.com/edifecs/fhir/R4')
 server_host = os.getenv('SERVER_HOST', default='0.0.0.0')
 
-cors_origins = ["http://localhost:3000"]
+cors_origins = ['http://localhost:3000','https://medilytics.netlify.app']
 cors_origins += additional_cors_origin if additional_cors_origin is not None else []
 CORS(app,origins=cors_origins)
 
@@ -402,4 +402,5 @@ def add_opo_record():
 
 # start the app
 if '__main__' == __name__:
-    app.run(debug=True, host=server_host, port=8088)
+    app.run(debug=True, host=server_host)
+    # app.run(debug=True, host=server_host, port=8088)

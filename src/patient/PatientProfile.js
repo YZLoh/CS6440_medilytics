@@ -15,7 +15,7 @@ import {
 import { Menu, ChevronLeft, Logout } from "@mui/icons-material";
 import { menuListItems } from "./menuList.js";
 import { useNavigate } from "react-router-dom";
-import { axiosSetup1 } from "../api/axios";
+import  axios  from "../api/axios";
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -69,13 +69,12 @@ export default function Dashboard() {
   const [patientData, setPatientData] = useState(null);
 
   useEffect(() => {
-    axiosSetup1
+    axios
       .get("/patient/profile")
       .then((response) => {
         setPatientData(response.data);
       })
       .catch((error) => {
-        // console.log(axiosSetup1);
         console.error("Error:", error);
       });
   }, []);

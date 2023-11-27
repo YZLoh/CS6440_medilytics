@@ -18,7 +18,7 @@ import PendingRecordPaper from "./PendingRecordPaper";
 import { menuListItems } from "./menuList.js";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
-import { axiosSetup1 } from "../api/axios";
+import  axios  from "../api/axios";
 import { Icon } from "@iconify/react";
 
 const drawerWidth = 240;
@@ -98,7 +98,7 @@ export default function PendingDonors() {
   // API call to mock updates
   const [records, setRecords] = useState([]);
   useEffect(() => {
-    axiosSetup1
+    axios
       .get("/opo/pending")
       .then((response) => {
         setRecords(response.data.data_list);
