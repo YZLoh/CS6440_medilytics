@@ -1,13 +1,12 @@
 ## User Manual   
 ### Deployed Application  
-Our application can be found at the following URL  
-https://medilytics.netlify.app
+Our application can be found at the following URL: https://medilytics.netlify.app  
 
 
 ### Using the application   
 1. Navigate to the following URL https://medilytics.netlify.app to access the Landing Page  
-2. The user may choose to browse the content of the Landing page to learn more about the application, or click on the *Get Started  * button to navigate to the Login Page
-3. On the Login Page the user can enter their credentials and click on the *Sign In* button to gain access to the application.
+2. The user may choose to browse the content of the Landing page to learn more about the application, or click on the **Get Started ** button to navigate to the Login Page
+3. On the Login Page the user can enter their credentials and click on the **Sign In** button to gain access to the application.
 4. There are 3 different user types that can access our application. Each user type's user journey is specified below.  
     1. Patient   
        1. To log in as a patient the user can enter the following credentials. `Email: jane@mail.com , Password: patient1234 ` 
@@ -15,7 +14,7 @@ https://medilytics.netlify.app
        3. To navigate to Updates they may have, they can click on the Updates section in the side navigation menu  
        4. To logout, the user may click on the logout button on the top right of the screen  
     2. Provider     
-       1. To log in as a provider the user can enter the following credentials. `Email: jack@mail.com Password: provider1234`     
+       1. To log in as a provider the user can enter the following credentials. `Email: jack@mail.com , Password: provider1234`     
        2. Upon logging in, the user will first see their Pending Donations page being loaded *pic*    
        3. To browse Allocated Donations they can click on the Allocated Donations section in the side navigation menu    
        4. To browse Records they can click on the Records section in the side navigation menu   
@@ -34,8 +33,8 @@ https://medilytics.netlify.app
  ### Special Instructions for Grading    
  To successfully deploy and run our application, please follow these instructions.   
 
-###Deploying the Flask backend on render.com
-First the docker image should be created. The docker file is already setup in the root directory. The build command must first be run, then the built image should be uploaded to a registry.
+### Deploying the Flask backend on render.com
+First the docker image should be created. The docker file is already setup in the root directory. The build command must first be run, then the built image should be uploaded to a registry.  
 
 **Building**
 `docker build -t <your_tag> .`
@@ -43,7 +42,7 @@ First the docker image should be created. The docker file is already setup in th
 **Pushing to Docker registry** 
 `docker push <your_registry_url>/<your_image_name>:<your_tag> `
 
-Once it's successfully pushed to the Docker registry, visit render.com and register / log in. 
+Once it's successfully pushed to the Docker registry, visit [https://render.com](https://render.com) and register / log in. 
 
 **Creating a web service**
 - click on the new button, and select web service
@@ -64,8 +63,8 @@ Once it's successfully pushed to the Docker registry, visit render.com and regis
 - The deployment URL is available on the top of the page in the form of `https://<your_web_service_name>.onrender.com` 
 - This is the URL that will be provided to the frontend so take note of this.
 
-**Deploying the React frontend on netlify.com**
-First the React project must be edited to include the deployed backend URL. Then it can be  built, and the build folder can be uploaded to Netlify.
+### Deploying the React frontend on netlify.com
+First the React project must be edited to include the deployed backend URL. Then it can be  built, and the build folder can be uploaded to Netlify.  
 
 **Preparing for build**
 - navigate to the src > api folder
@@ -77,15 +76,15 @@ First the React project must be edited to include the deployed backend URL. Then
 - run `npm run build`
 
 **Configuring the build folder**
-- move the netlify.toml file from the root directory to the build folder
+- move the netlify.toml file provided in the root directory to the build folder
 
 **Uploading to Neltify**
-- visit netlify.com and register / log in. 
+- visit [https://netlify.com](https://netlify.com) and register / log in. 
 - navigate to https://app.netlify.com/drop
 - drag and drop the build folder generated in the previous step
 - once it's successfully uploaded, navigate to the Site configuration section then Site details 
 - Click on the change site name button and rename it to medilytics and save the changes.
 
 **Testing the deployment**
-- Visit medilytics.netlify.app and you should be able to see the app's Landing Page.
+- Visit https://medilytics.netlify.app and you should be able to see the app's Landing Page.
 
