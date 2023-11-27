@@ -19,7 +19,7 @@ import RecipientRecordPaper from "./RecipientRecordPaper";
 import { menuListItems } from "./menuList.js";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
-import { axiosSetup1 } from "../api/axios";
+import  axios  from "../api/axios";
 import { Icon } from "@iconify/react";
 
 const drawerWidth = 240;
@@ -120,7 +120,7 @@ export default function Recipients() {
   const [records, setRecords] = useState([]);
   // API call to mock updates
   useEffect(() => {
-    axiosSetup1
+    axios
       .get("/provider/recipients")
       .then((response) => {
         setRecords(response.data.data_list);

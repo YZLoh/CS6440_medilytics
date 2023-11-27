@@ -1,12 +1,4 @@
 import axios from "axios";
-
-export const axiosSetup1 =  axios.create({
-    baseURL: 'http://localhost:8088'
-    // baseURL:'https://fhir.collablynk.com/edifecs/fhir/R4'
+export default axios.create({
+    baseURL:'https://medilytics-py-5b1u.onrender.com'
 });
-
-export const axiosSetup2 =  axios.create({  
-    baseURL: 'http://localhost:8089'
-});
-
-export default axiosSetup2;
