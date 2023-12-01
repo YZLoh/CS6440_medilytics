@@ -1,21 +1,27 @@
-## User Manual   
+## User Manual
+1. [Deployed Application](#deployed-application)
+2. [Using The Application ](#using-the-application)
+3. [Special Instructions for Grading ](#special-instructions-for-grading)
+    - [Backend Deployment](#deploying-the-flask-backend)
+    - [Frontend Deployment](#deploying-the-react-frontend)
+
 ### Deployed Application  
 Our application can be found at the following URL: https://medilytics.netlify.app  
 
 
-### Using the application   
+## Using the application   
 1. Navigate to the following URL https://medilytics.netlify.app to access the Landing Page  
-2. The user may choose to browse the content of the Landing page to learn more about the application, or click on the **Get Started ** button to navigate to the Login Page
+2. The user may choose to browse the content of the Landing page to learn more about the application, or click on the **Get Started** button to navigate to the Login Page
 3. On the Login Page the user can enter their credentials and click on the **Sign In** button to gain access to the application.
 4. There are 3 different user types that can access our application. Each user type's user journey is specified below.  
     1. Patient   
        1. To log in as a patient the user can enter the following credentials. `Email: jane@mail.com , Password: patient1234 ` 
-       2. Upon logging in, the user will first see their Profile page being loaded *pic*  
-       3. To navigate to Updates they may have, they can click on the Updates section in the side navigation menu  
+       2. Upon logging in, the user will first see their Profile page being loaded   
+       3. To browse Updates they may have, they can click on the Updates section in the side navigation menu  
        4. To logout, the user may click on the logout button on the top right of the screen  
     2. Provider     
        1. To log in as a provider the user can enter the following credentials. `Email: john@mail.com , Password: provider1234`     
-       2. Upon logging in, the user will first see their Pending Donations page being loaded *pic*    
+       2. Upon logging in, the user will first see their Pending Donations page being loaded    
        3. To browse Allocated Donations they can click on the Allocated Donations section in the side navigation menu    
        4. To browse Records they can click on the Records section in the side navigation menu   
        5. To search Records, the user can enter their search query in the serach box and click on the search button.  
@@ -24,17 +30,17 @@ Our application can be found at the following URL: https://medilytics.netlify.ap
     
     3. OPO  
        1. To log in as an OPO user the user can enter the following credentials. `Email: jack@mail.com , Password: opo1234`  
-       2. Upon logging in, the user will first see the Donors page being loaded *pic*  
+       2. Upon logging in, the user will first see the Donors page being loaded  
        3. To browse a list of Recipients , they can click on the Recipients section in the side navigation menu  
        4. To add a new patient , they can click on the New Patient section in the side navigation menu  
        5. On the New Patient page, after filling out the required fields, they can click on the save button to save the new patient's details.  
        6. To logout, the user may click on the logout button on the top right of the screen.    
     
- ### Special Instructions for Grading    
+ ## Special Instructions for Grading    
  To successfully deploy and run our application, please follow these instructions.   
-
-### Deploying the Flask backend on render.com
-First the docker image should be created. The docker file is already setup in the root directory. The build command must first be run, then the built image should be uploaded to a registry.  
+ 
+ ### Deploying the Flask backend
+The flask backend should be deployed on render.com. To do so, first the docker image should be created. The docker file is already setup in the root directory. The build command must first be run, then the built image should be uploaded to a registry.  
 
 **Building**
 `docker build -t <your_tag> .`
@@ -63,8 +69,8 @@ Once it's successfully pushed to the Docker registry, visit [https://render.com]
 - The deployment URL is available on the top of the page in the form of `https://<your_web_service_name>.onrender.com` 
 - This is the URL that will be provided to the frontend so take note of this.
 
-### Deploying the React frontend on netlify.com
-First the React project must be edited to include the deployed backend URL. Then it can be  built, and the build folder can be uploaded to Netlify.  
+### Deploying the React frontend
+The frontend should be deployed on netlify.com. To do so, first the React project must be edited to include the deployed backend URL. Then it can be  built, and the build folder can be uploaded to Netlify.  
 
 **Preparing for build**
 - navigate to the src > api folder
