@@ -14,7 +14,7 @@ Our application can be found at the following URL: https://medilytics.netlify.ap
        3. To navigate to Updates they may have, they can click on the Updates section in the side navigation menu  
        4. To logout, the user may click on the logout button on the top right of the screen  
     2. Provider     
-       1. To log in as a provider the user can enter the following credentials. `Email: jack@mail.com , Password: provider1234`     
+       1. To log in as a provider the user can enter the following credentials. `Email: john@mail.com , Password: provider1234`     
        2. Upon logging in, the user will first see their Pending Donations page being loaded *pic*    
        3. To browse Allocated Donations they can click on the Allocated Donations section in the side navigation menu    
        4. To browse Records they can click on the Records section in the side navigation menu   
@@ -23,7 +23,7 @@ Our application can be found at the following URL: https://medilytics.netlify.ap
        7. To logout, the user may click on the logout button on the top right of the screen.  
     
     3. OPO  
-       1. To log in as an OPO user the user can enter the following credentials. `Email: john@mail.com , Password: opo1234`  
+       1. To log in as an OPO user the user can enter the following credentials. `Email: jack@mail.com , Password: opo1234`  
        2. Upon logging in, the user will first see the Donors page being loaded *pic*  
        3. To browse a list of Recipients , they can click on the Recipients section in the side navigation menu  
        4. To add a new patient , they can click on the New Patient section in the side navigation menu  
