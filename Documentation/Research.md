@@ -1,9 +1,6 @@
 #### Research
-- Any research done during the course of the project. This will vary heavily by project.
-- As always, check with your TA mentor on expectations.
 
 **FHIR Implementation Concerns**
-
 - Thorough research was done prior to being able to successfully interact with the FHIR source for patient data
 - We were unable to find all the matching FHIR sources for other data such as organ information (this may
 be due to sensitivity issues)
@@ -31,11 +28,11 @@ FHIRValidationError: {root}:
     'Non-optional property "description" on <fhirclient.models.capabilitystatement.CapabilityStatementImplementation object at 0x7ff88bf7ea50> is missing'
 > Seems that the library is not updated with latest schema
  
--- Outcome of research
+- Outcome of research
 > consider using other clients, e.g. JS
 > consider using our own sandbox, e.g. https://github.com/smart-on-fhir/smart-dev-sandbox
 
--- Team decision
-> proceed with the Python client 
-> interact with the open serve to fetch patient data 
-> use a mock server to generate the rest of the needed data
+**Team decision**
+- proceed with the Python client 
+- interact with the open FHIR server to fetch patient data 
+- use a mock server to generate the rest of the needed data
