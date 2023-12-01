@@ -62,6 +62,8 @@ Frontend: [https://medilytics.netlify.app](https://medilytics.netlify.app)
 
 ## Live Demo
 [https://medilytics.netlify.app](https://medilytics.netlify.app)  
+![Demo](https://github.gatech.edu/cs6440-team29/medilytics/blob/mika-dev/doc/siteOverview.gif)
+
 
 ## Application Access
 Please use the provided credentials to gain access to the app
@@ -71,18 +73,19 @@ Please use the provided credentials to gain access to the app
 
 
 ## Documentation
+All the documentation compiled for the project artifacts can be found in the Documentation folder. 
 **User Manual**  
-Documentation > UserManual
-URL: https://github.gatech.edu/cs6440-team29/medilytics/blob/main/Documentation/UserManual.md
+- Documentation > UserManual
+- URL: https://github.gatech.edu/cs6440-team29/medilytics/blob/main/Documentation/UserManual.md
 
 **Research**
-Documentation > Research
-URL: https://github.gatech.edu/cs6440-team29/medilytics/blob/main/Documentation/Research.md
+- Documentation > Research
+- URL: https://github.gatech.edu/cs6440-team29/medilytics/blob/main/Documentation/Research.md
 
 **Architecture Diagram**
-Documentation >
-URL:https://github.gatech.edu/cs6440-team29/medilytics/blob/main/Documentation/ArchitectureDiagram.md
+- Documentation > ArchitectureDiagram
+- URL:https://github.gatech.edu/cs6440-team29/medilytics/blob/main/Documentation/ArchitectureDiagram.md
 
 **Config**
-Documentation > Config
-URL: https://github.gatech.edu/cs6440-team29/medilytics/blob/main/Documentation/Config.md
+- Documentation > Config
+- URL: https://github.gatech.edu/cs6440-team29/medilytics/blob/main/Documentation/Config.md
