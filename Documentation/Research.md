@@ -2,13 +2,12 @@
 
 **FHIR Implementation Concerns**
 - Thorough research was done prior to being able to successfully interact with the FHIR source for patient data
-- We were unable to find all the matching FHIR sources for other data such as organ information (this may
-be due to sensitivity issues)
+- We were unable to find all the matching FHIR sources for other data such as organ information, either due to insufficient concept code (BiologicallyDerivedProduct: https://build.fhir.org/valueset-biologicallyderived-productcodes.html) or restricted use (Media https://www.hl7.org/fhir/R4/media.html).
 
 **Python Client Usage**
-- The recommended Python client had various versioning and dependency issues
+- The recommended Python client (https://github.com/smart-on-fhir/client-py) had various versioning and dependency issues in their readme
 
-- Tried running flask app from the recommended python client (https://github.com/smart-on-fhir/client-py)
+- Tried running flask app from the recommended python client 
 > error in system library
 ImportError: cannot import name 'Mapping' from 'collections' (/usr/lib/python3.10/collections/__init__.py)
 > installed lower version of python
@@ -22,17 +21,14 @@ ImportError: cannot import name 'Mapping' from 'collections' (/usr/lib/python3.1
 - Example app runs with long loading time and eventual time out
 > found multiple issues regarding the sandbox used (e.g. https://github.com/smart-on-fhir/client-py/issues/38 and its linked issues)
 > tried multiple sandboxes and got connection error/certificate error, etc. (list: https://confluence.hl7.org/display/FHIR/Public+Test+Servers, https://wiki.hl7.org/index.php?title=Publicly_Available_FHIR_Servers_for_testing)
-> connectable server (http://hapi.fhir.org/baseDstu3) has validation error
-FHIRValidationError: {root}:
-  implementation:
-    'Non-optional property "description" on <fhirclient.models.capabilitystatement.CapabilityStatementImplementation object at 0x7ff88bf7ea50> is missing'
-> Seems that the library is not updated with latest schema
+> found useble servers after few rounds of testing (https://github.gatech.edu/cs6440-team29/medilytics/blob/main/src/server/server.py#L26)
  
-- Outcome of research
-> consider using other clients, e.g. JS
-> consider using our own sandbox, e.g. https://github.com/smart-on-fhir/smart-dev-sandbox
+Outcome of research
+- the current client is not perfect. If we find other problems in the python client, consider using other clients, e.g. JS client 
+- open FHIR server does not have uptime guarantee. If it is at the risk of being taken down, consider using our own sandbox, e.g. https://github.com/smart-on-fhir/smart-dev-sandbox
+- another alternative: a local container to have more control over the FHIR server dependency (https://github.gatech.edu/cs6440-team29/medilytics/compare/main...mwu-fhir-docker)
 
 **Team decision**
-- proceed with the Python client 
-- interact with the open FHIR server to fetch patient data 
+- proceed with the Python client unless further issue is detected, keeo JS client as a backup
+- interact with the open FHIR server to fetch patient data, minimize deployment overhead and performance concerns 
 - use a mock server to generate the rest of the needed data
